@@ -29,15 +29,15 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Acr Login
-          uses: azure/docker-login@v1
-          with:
-            username: ${{ secrets.ACR_USERNAME }}
-            password: ${{ secrets.ACR_PASSWORD }}
-            login-server: ${{ secrets.ACR_ENDPOINT }}
+        uses: azure/docker-login@v1
+        with:
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+          login-server: ${{ secrets.ACR_ENDPOINT }}
 
       - name: Login to Amazon ECR
-          id: login-ecr
-          uses: aws-actions/amazon-ecr-login@v1
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
