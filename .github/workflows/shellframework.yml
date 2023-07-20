@@ -59,7 +59,7 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Enable Docker Buildx experimental mode
-        run: echo $DOCKER_CLI_A | sudo tee /etc/docker/daemon.json
+        run: echo ${{ env.DOCKER_CLI_A }} | sudo tee /etc/docker/daemon.json
         if: runner.os == 'Linux'  # This step is specific to Linux-based runners
 
       - name: Set up Docker Buildx
