@@ -1,16 +1,9 @@
 name: gravitron
 
-  #on:
-  # Trigger the workflow on push or pull request,
-# but only for the development branch
-#  push:
-#    branches:
-#      - development
-# it will create a release branch if it is triggered via scheduler
 on: [push]
 
 env:
-  IMAGE_NAME: gravitron  # Replace with your desired image name
+  IMAGE_NAME: gravitron         # Replace with your desired image name
   ACR_NAME: multiarchtest      # Replace with your Azure Container Registry name
 
 jobs:
@@ -23,6 +16,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: '17'
 
       - name: Build with Maven
