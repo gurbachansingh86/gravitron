@@ -2,11 +2,6 @@ name: gravitron
 
 on: [push]
 
-env:
-  IMAGE_NAME: gravitron         # Replace with your desired image name
-  ACR_NAME: multiarchtest      # Replace with your Azure Container Registry name
-  DOCKER_CLI_A: '{"experimental": "enabled"}'  # Enable experimental mode for Docker Buildx
-
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -32,23 +27,14 @@ jobs:
       - name: Log in to Azure Container Registry
         uses: azure/docker-login@v1
         with:
-          login-server: ${{ env.ACR_NAME }}
+          login-server: ${{ env.ACR_ENDPOINT }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
-
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
       - name: Build multi-platform Docker image
         run: |
-          docker buildx create --use --name mybuilder
-          docker buildx build --push --tag ${{ env.ACR_NAME }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.ACR_NAME }}/${{ env.IMAGE_NAME }}:1.0 .
-
-      - name: Build and Push multi-platform Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ env.ACR_NAME }}/${{ env.IMAGE_NAME }}:latest
+          docker build -t multiarchtest.azurecr.io/multiarchimages:gravitron-new -f Dockerfile .
+          docker buildx build --platform linux/amd64,linux/arm64 -t multiarchtest.azurecr.io/multiarchimages:gravitron-new --push .
