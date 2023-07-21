@@ -36,5 +36,5 @@ jobs:
 
       - name: Build multi-platform Docker image
         run: |
-          docker build -t multiarchtest.azurecr.io/multiarchimages:gravitron-new -f Dockerfile .
+          #docker build -t multiarchtest.azurecr.io/multiarchimages:gravitron-new -f Dockerfile .
           docker buildx build --platform linux/amd64,linux/arm64 -t multiarchtest.azurecr.io/multiarchimages:gravitron-new --push .
