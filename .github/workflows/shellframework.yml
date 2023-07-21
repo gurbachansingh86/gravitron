@@ -76,7 +76,7 @@ jobs:
       - name: Build multi-platform Docker image
         run: |
           docker buildx create --use --name mybuilder
-          docker buildx build --cache-from=type=local,src=/tmp/.buildx-cache --push --tag ${{ env.ACR_NAME }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.ACR_NAME }}/${{ env.IMAGE_NAME }}:1.0 .
+          docker buildx build --push --tag ${{ env.ACR_NAME }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.ACR_NAME }}/${{ env.IMAGE_NAME }}:1.0 .
         if: runner.os == 'Linux'  # This step is specific to Linux-based runners
 
       - name: Remove Docker Buildx experimental mode config
