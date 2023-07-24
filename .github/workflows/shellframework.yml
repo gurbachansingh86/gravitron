@@ -6,6 +6,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Verify CI Framework run
+        shell: bash
+        run: docker -v
       - name: Checkout
         uses: actions/checkout@v3
 
