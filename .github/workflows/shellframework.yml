@@ -37,9 +37,13 @@ jobs:
       - name: Docker information
         run: |
           echo "Docker Driver info :"
+          echo "docker version :"
           docker version
+          echo "docker buildx version :"
           docker buildx version
+          echo "docker buildx inspect :"
           docker buildx inspect
+          echo "docker info :"
           docker info
 
       - name: Build multi-platform Docker image
