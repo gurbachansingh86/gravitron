@@ -6,30 +6,30 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Verify CI Framework run
-        shell: bash
-        run: docker -v
-      - name: Checkout
-        uses: actions/checkout@v3
+#      - name: Verify CI Framework run
+#        shell: bash
+#        run: docker -v
+#      - name: Checkout
+#        uses: actions/checkout@v3
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '17'
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'adopt'
+#          java-version: '17'
 
-      - name: Build with Maven
-        run: mvn clean package
+#      - name: Build with Maven
+#        run: mvn clean package
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
-      - name: Log in to Azure Container Registry
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.ACR_ENDPOINT }}
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
+#      - name: Log in to Azure Container Registry
+#        uses: azure/docker-login@v1
+#        with:
+#          login-server: ${{ secrets.ACR_ENDPOINT }}
+#          username: ${{ secrets.ACR_USERNAME }}
+#          password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -46,8 +46,8 @@ jobs:
           echo "docker info :"
           docker info
 
-      - name: Build multi-platform Docker image
-        run: |
-          # Get the latest commit hash (first 6 characters)
-          latest_commit=$(git log -1 --format="%H" | cut -c 1-7)
-          docker buildx build --platform linux/amd64,linux/arm64 -t multiarchtest.azurecr.io/multiarchimages:gravitron-$latest_commit --push .
+ #     - name: Build multi-platform Docker image
+ #       run: |
+ #         # Get the latest commit hash (first 6 characters)
+ #         latest_commit=$(git log -1 --format="%H" | cut -c 1-7)
+ #         docker buildx build --platform linux/amd64,linux/arm64 -t multiarchtest.azurecr.io/multiarchimages:gravitron-$latest_commit --push .
