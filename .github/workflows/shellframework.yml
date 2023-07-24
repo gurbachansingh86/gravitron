@@ -38,9 +38,4 @@ jobs:
         run: |
           # Get the latest commit hash (first 6 characters)
           latest_commit=$(git log -1 --format="%H" | cut -c 1-7)
-          # Get the current branch name
-          current_branch=$(git rev-parse --abbrev-ref HEAD)
-          # Set environment variables
-          set_env_var "LATEST_COMMIT" "$latest_commit"
-          set_env_var "CURRENT_BRANCH" "$current_branch"
-          docker buildx build --platform linux/amd64,linux/arm64 -t multiarchtest.azurecr.io/multiarchimages:gravitron-$LATEST_COMMIT --push .
+          docker buildx build --platform linux/amd64,linux/arm64 -t multiarchtest.azurecr.io/multiarchimages:gravitron-$latest_commit --push .
