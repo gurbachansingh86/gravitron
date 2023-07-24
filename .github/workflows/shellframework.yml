@@ -34,6 +34,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Docker information
+        run: |
+          echo "Docker Driver info :"
+          docker info
+
       - name: Build multi-platform Docker image
         run: |
           # Get the latest commit hash (first 6 characters)
