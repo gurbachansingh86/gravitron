@@ -6,27 +6,24 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.PAT_GITHUB }}
-        fetch-depth: '0'
+      - uses: actions/checkout@v2
 
-        # https://github.com/docker/setup-qemu-action
-        - name: Set up QEMU
-          uses: docker/setup-qemu-action@v2
+      # https://github.com/docker/setup-qemu-action
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
-        # https://github.com/docker/setup-buildx-action
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      # https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-    - name: Docker information
-      run: |
-            echo "Docker Driver info :"
-            echo "docker version :"
-            docker version
-            echo "docker buildx version :"
-            docker buildx version
-            echo "docker buildx inspect :"
-            docker buildx inspect
-            echo "docker info :"
-            docker info
+      - name: Docker information
+        run: |
+              echo "Docker Driver info :"
+              echo "docker version :"
+              docker version
+              echo "docker buildx version :"
+              docker buildx version
+              echo "docker buildx inspect :"
+              docker buildx inspect
+              echo "docker info :"
+              docker info
